@@ -4,27 +4,30 @@ function validateForm() {
     var email = document.forms["myForm"]["email"].value;
     var password = document.forms["myForm"]["password"].value;
 
-    var nameRegex = /^[A-Za-z]+$/;
+    // Regex tikai latviešu burtiem ar mīkstinājuma un garumzīmēm
+    var nameRegex = /^[A-Za-zĀāČčĒēĢģĪīĶķĻļŅņÓóŠšŪūŽž]+$/;
+    
     if (!nameRegex.test(firstName)) {
-        alert("Jāsatur tikai burtus.");
+        alert("Vārds jābūt tikai ar latviešu burtiem.");
         return false;
     }
+    
     if (!nameRegex.test(lastName)) {
-        alert("Jāsatur tikai burtus");
+        alert("Uzvārds jābūt tikai ar latviešu burtiem.");
         return false;
     }
 
     var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
     if (!emailRegex.test(email)) {
-        alert("Ievadi normālu epastu.");
+        alert("Ievadi pareizu epasta formātu.");
         return false;
     }
 
     var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{9,}$/;
     if (!passwordRegex.test(password)) {
-        alert("Minimālais paroles garums 9, iekļaut simbolu, ciparu, mazo un lielo burtu.");
+        alert("Parolei jābūt vismaz 9 rakstzīmēm, tai jāietver cipars, simbols, mazais un lielais burts.");
         return false;
     }
 
-    return true; // Form validation passed, allow form submission
+    return true; 
 }
