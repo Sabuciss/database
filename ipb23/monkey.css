@@ -1,0 +1,119 @@
+/* Monkey Password Animation */
+.password-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+}
+
+.monkey {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+/* Monkey Face */
+.face {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: #f4c07d;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #e69c5d;
+}
+
+/* Monkey Ears */
+.ears::before, .ears::after {
+    content: "";
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background: #f4c07d;
+    border-radius: 50%;
+    border: 3px solid #e69c5d;
+    top: 10px;
+}
+
+.ears::before {
+    left: -15px;
+}
+
+.ears::after {
+    right: -15px;
+}
+
+/* Monkey Eyes */
+.eyes {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 40px;
+}
+
+.eye {
+    width: 10px;
+    height: 10px;
+    background: black;
+    border-radius: 50%;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Monkey Hands (with subtle outline & visibility tweak) */
+.hand {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #f4c07d;
+    border-radius: 50%;
+    transition: transform 0.3s ease-in-out;
+    border: 2px solid #d18b5d; /* Adds a subtle outline */
+    box-shadow: inset -2px -2px 5px rgba(0, 0, 0, 0.2); /* Adds depth */
+}
+
+/* Left hand */
+.left-hand {
+    left: -20px;
+    top: 10px;
+    transform: translate(0, 0);
+}
+
+/* Right hand */
+.right-hand {
+    right: -20px;
+    top: 10px;
+    transform: translate(0, 0);
+}
+
+/* When typing, hands move to fully cover eyes but remain slightly visible */
+.monkey.cover .left-hand {
+    transform: translate(20px, -5px);
+    opacity: 0.9; /* Keeps it slightly visible */
+}
+
+.monkey.cover .right-hand {
+    transform: translate(-20px, -5px);
+    opacity: 0.9;
+}
+
+/* Eyes should disappear when hands cover them */
+.monkey.cover .eye {
+    opacity: 0;
+}
+
+/* Peeking - Monkey Opens One Eye */
+.monkey.peek .left-hand {
+    transform: translate(20px, -5px); /* Move left hand away */
+}
+
+.monkey.peek .right-hand {
+    transform: translate(5px, -5px); /* Keep right hand close */
+}
+
+.monkey.peek .eye {
+    opacity: 1; /* Show one eye */
+}
