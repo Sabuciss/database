@@ -6,6 +6,8 @@
     <title>Register</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="monkey.css">
+    <script defer src="validator.js"></script>
+    <script defersrc="monkey.js"></script>
 </head>
 <body>
     <div class="container">
@@ -13,7 +15,7 @@
         <form name="myForm" action="register.php" method="POST" onsubmit="return validateForm()">
             <div class="input-group">
                 <input type="text" name="first_name" required>
-                <label>First Name</label>
+                <label>Pirmais vārds</label>
             </div>
             <div class="input-group">
                 <input type="text" name="last_name" required>
@@ -50,7 +52,6 @@
             <button type="submit" class="btn">Register</button> 
         </form>
     </div>
-    <script src="validator.js"></script>
-    <script src="monkey.js"></script>
+   
 </body>
 </html>
