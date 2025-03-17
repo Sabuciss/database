@@ -40,20 +40,40 @@
                 <label for="email">Email</label>
             </div>
 
-            <div class="input-group">
-                <input type="password" id="password" required>
-                <label for="password">Password</label>
-            </div>
-
             <button type="submit" class="wave-button">Create Account</button>
         </form>
     </section>
 
-    <!-- Read User Section (Placeholder) -->
+    <!-- Read User Section -->
     <section id="readUserSection" style="display: none;">
-        <h2>Read Users</h2>
-        <p>Coming soon...</p>
+        <h2>Users</h2>
+        <table id="userTable">
+            <!-- Table structure for displaying users will be populated here -->
+        </table>
     </section>
+
+<!-- Edit User Section (Card over the user list) -->
+<section id="editUserSection" style="display:none;" class="edit-card">
+    <h2>Edit User</h2>
+    <form id="editUserForm">
+        <input type="hidden" id="editUserId">
+        <label for="editFirstName">First Name:</label>
+        <input type="text" id="editFirstName" required><br>
+
+        <label for="editLastName">Last Name:</label>
+        <input type="text" id="editLastName" required><br>
+
+        <label for="editPhone">Phone:</label>
+        <input type="text" id="editPhone" required><br>
+
+        <label for="editEmail">Email:</label>
+        <input type="email" id="editEmail" required><br>
+
+        <button type="button" id="saveUserBtn">Save</button>
+        <button type="button" id="cancelEditBtn">Cancel</button>
+    </form>
+</section>
+
 
     <script src="script.js"></script>
 </body>
