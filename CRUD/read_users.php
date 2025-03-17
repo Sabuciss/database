@@ -2,7 +2,7 @@
 require 'config.php'; // Include DB connection
 
 try {
-    $stmt = $pdo->query("SELECT id, first_name, last_name, tel, email FROM users"); 
+    $stmt = $pdo->query("SELECT id, first_name, last_name, tel, email FROM users");
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     echo json_encode($users);
