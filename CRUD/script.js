@@ -5,7 +5,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const createUserSection = document.getElementById('createUserSection');
     const readUserSection = document.getElementById('readUserSection');
     const editUserSection = document.getElementById('editUserSection'); // Edit user section
-
+    const userForm = document.getElementById('userForm'); // The create user form
+    const saveUserBtn = document.getElementById('saveUserBtn'); // Save button for editing
+    const cancelEditBtn = document.getElementById('cancelEditBtn'); // Cancel button for editing
+    
     // Toggle sections when menu items are clicked
     if (createUserBtn && readUserBtn && createUserSection && readUserSection && editUserSection) {
         createUserBtn.addEventListener('click', () => {
@@ -20,6 +23,43 @@ document.addEventListener('DOMContentLoaded', function () {
             editUserSection.style.display = 'none'; // Hide edit section
         });
     }
+
+    // Handle Create User form submission
+    userForm.addEventListener('submit', async function (e) {
+        e.preventDefault();  // Prevent normal form submission
+
+        const firstName = document.getElementById('firstName').value;
+        const lastName = document.getElementById('lastName').value;
+        const phone = document.getElementById('phone').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        const formData = new FormData();
+        formData.append("firstName", firstName);
+        formData.append("lastName", lastName);
+        formData.append("phone", phone);
+        formData.append("email", email);
+        formData.append("password", password);
+
+        try {
+            // Sending the data to PHP script using fetch API (AJAX)
+            const response = await fetch("create_user.php", {
+                method: "POST",
+                body: formData
+            });
+
+            const result = await response.json();
+            alert(result.message); // Show success or error message
+
+            if (result.status === "success") {
+                // Optionally reset the form or update the UI
+                userForm.reset();
+                readUserBtn.click(); // Refresh user list
+            }
+        } catch (error) {
+            console.error("Error creating user:", error);
+        }
+    });
 
     // Show users and allow editing
     readUserBtn.addEventListener('click', async function () {
@@ -98,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Handle the "Save" button click for updating user information
-    document.getElementById('saveUserBtn').addEventListener('click', async function () {
+    saveUserBtn.addEventListener('click', async function () {
         const userId = document.getElementById('editUserId').value;
         const firstName = document.getElementById('editFirstName').value;
         const lastName = document.getElementById('editLastName').value;
@@ -132,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Handle the "Cancel" button click to close the edit section without saving
-    document.getElementById('cancelEditBtn').addEventListener('click', function () {
+    cancelEditBtn.addEventListener('click', function () {
         editUserSection.style.display = 'none';
         readUserSection.style.display = 'block';
         document.body.classList.remove('editing');
