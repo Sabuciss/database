@@ -57,9 +57,9 @@ document.addEventListener('DOMContentLoaded', function () {
                         <td>${user.last_name}</td>
                         <td>${user.tel}</td>
                         <td>${user.email}</td>
-                        <td>
-                            <a href="#" class="editBtn" data-id="${user.id}" data-firstname="${user.first_name}" data-lastname="${user.last_name}" data-phone="${user.tel}" data-email="${user.email}">Edit  </a> 
-                            <a href="#" class="deleteBtn" data-id="${user.id}">Delete</a>
+                       <td>
+                            <button class="editBtn" data-id="${user.id}" data-firstname="${user.first_name}" data-lastname="${user.last_name}" data-phone="${user.tel}" data-email="${user.email}">Edit</button>
+                            <button class="deleteBtn" data-id="${user.id}">Delete</button>
                         </td>
                     </tr>
                 `;
