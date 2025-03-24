@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+</head>
+<body>
+
+    <!-- Form for file upload -->
+    <h2>Upload File</h2>
+    <form id="uploadForm" action="upload.php" method="post" enctype="multipart/form-data">
+        <label for="fileUpload">Choose file to upload:</label>
+        <input type="file" name="fileUpload" id="fileUpload" required><br><br>
+        <input type="submit" value="Upload File">
+    </form>
+
+    <!-- Display the uploaded file path after successful upload -->
+    <div id="filePath"></div>
+
+    <script>
+        // Optional: Show file path in the browser once the user selects the file
+        document.getElementById('fileUpload').addEventListener('change', function() {
+            document.getElementById('filePath').innerText = 'Selected file: ' + this.value.split('\\').pop();
+        });
+    </script>
+
+</body>
+</html>
