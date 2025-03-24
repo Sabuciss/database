@@ -1,3 +1,32 @@
+document.getElementById('userForm').addEventListener('submit', async function (event) {
+    event.preventDefault(); // Prevent default form submission
+
+    const firstName = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
+    const phone = document.getElementById('phone').value;
+    const email = document.getElementById('email').value;
+
+    const formData = new FormData();
+    formData.append('firstName', firstName);
+    formData.append('lastName', lastName);
+    formData.append('phone', phone);
+    formData.append('email', email);
+
+    try {
+        const response = await fetch('create_user.php', {
+            method: 'POST',
+            body: formData,
+        });
+
+        const result = await response.json();
+        alert(result.message);
+        // Reset form after successful submission
+        document.getElementById('userForm').reset();
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
+
 document.addEventListener('DOMContentLoaded', function () {
     // Get buttons and sections
     const createUserBtn = document.getElementById('createUserBtn');
