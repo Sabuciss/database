@@ -1,63 +1,61 @@
 <?php 
-//veido reportus jeb ierakstus prieks debugging
-ini_set('display_errors', 1); // attēlo kļūdas ja tadas ir 
+ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-error_reporting(1);
+error_reporting(E_ALL);
 
 require_once 'config.php';
- 
+
+if (!$conn) {
+    die("Database connection failed!");
+}
+
 $successMessage = "";
 
-if (isset($_FILES['uploadedFile'])) {  //pārbauda vai tika augšupielādēts fails caur mūsu failu 
+if (isset($_FILES['uploadedFile'])) {  
     $file = $_FILES['uploadedFile'];
     $fileName = $file['name'];
     $fileTmpName = $file['tmp_name'];
-    $fileError = $file['error'];
+    $fileError = $file['error']; 
 
-    $uploadDir = "uploads/"; //kur glabās 
+    $uploadDir = "uploads/"; 
 
-    if (!is_dir($uploadDir)){ //checko ja upload mape nav izveidota 
-        mkdir($uploadDir, 0777, true); // 777 read+write+execute
+    if (!is_dir($uploadDir)) { 
+        mkdir($uploadDir, 0777, true);
     }
-   $filePath = $uploadDir . basename($fileName); //pilnais nosaukums kur saglabas
 
-   if ($filError === 0){  //pārbauda errorus
-       if (move_uploaded_file($fileTmpName, $filePath)){ //ja viss save pārceļ uz īsto lokāciju 
-        $successMessage .= "File successfully uploaded to folder.\n "; //ziņojums ka viss ir okey
+    $filePath = $uploadDir . basename($fileName); 
 
-        $sql = "INSERT INTO upload_paths (file_name, file_path) VALUES (:fileName, :filePath";
-        $stmt = $conn->prepare($sql); //atļauj izvairīties no sql injections 
+    if ($fileError === 0) {  
+        if (move_uploaded_file($fileTmpName, $filePath)) { 
+            $successMessage .= "File successfully uploaded to folder.\n";
 
-        try{
-            $stm->execute([
-                ':filename' => $fileName, //iepushojam faila details db
-                ':filePath' => $filePath
+            $sql = "INSERT INTO upload_paths (file_name, file_path) VALUES (:fileName, :filePath)";
+            $stmt = $conn->prepare($sql); 
 
-            ]);
+            try {
+                $stmt->execute([
+                    ':fileName' => $fileName, 
+                    ':filePath' => $filePath
+                ]);
 
-            if ($stmt->rowCount() > 0){ //pārbauda vai tikaveiksmīgi ievietots db
-                $successMessage .= "File path saved in the db successfully!";
+                if ($stmt->rowCount() > 0) {  
+                    $successMessage .= "File path saved in the DB successfully!";
+                } else {
+                    $successMessage .= "Failed to save file path in the DB.";
+                }
+            } catch (PDOException $e) {
+                $successMessage .= "Error saving file to the DB: " . $e->getMessage();
             }
-            else{
-                $successMessage .= "Failed to save file path in the db"; //ja ir kļūdas attelo tās
-            }
-         }
-         catch(PDOException $e){
-            $successMessage .= "Error saving file to the db" . $e->getMessage() . " ";
-         }
-      }
-      else{
-        $successMessage .= "Failed to upload file!";
-      }
-   } else{
-    $successMessage .= "Error upload your file!";
-  }
+        } else {
+            $successMessage .= "Failed to upload file!";
+        }
+    } else {
+        $successMessage .= "Error uploading your file!";
+    }
 }
 
-$conn = null; //db connection aizvēršana lai taupītu mūsu servera resursus
+$conn = null; 
 
-header("Location: index.html?successMessage=" . urlencode($successMessage)); //rederecto uz mūsu index.html
+header("Location: index.html?successMessage=" . urlencode($successMessage));
 exit();
-
-
 ?>
