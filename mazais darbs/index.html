@@ -13,37 +13,37 @@
             <li><a href="upload.html">Failu augšupielāde</a></li>
         </ul>
     </nav>
-
-    <section id="createUserSection">
-        <h2>Izveidot lietotāju</h2>
-        <form id="userForm" method="POST" action="register.php">
-            <div class="input-group">
-                <input type="text" name="first_name" required placeholder="Vārds">
-                <label for="first_name">Vārds</label>
-            </div>
-            <div class="input-group">
-                <input type="text" name="last_name" required placeholder="Uzvārds">
-                <label for="last_name">Uzvārds</label>
-            </div>
-            <div class="input-group">
-                <input type="tel" name="phone" required placeholder="Telefona numurs">
-                <label for="phone">Telefona numurs</label>
-            </div>
-            <div class="input-group">
-                <input type="email" name="email" required placeholder="E-pasts">
-                <label for="email">E-pasts</label>
-            </div>
-            <div class="input-group">
-                <input type="date" name="d_o_b" required>
-                <label for="d_o_b">Dzimšanas datums</label>
-            </div>
-            <div class="input-group">
-                <input type="password" name="password" required placeholder="Parole">
-                <label for="password">Parole</label>
-            </div>
-            <button type="submit">Izveidot kontu</button>
-        </form>
-    </section>
-    <script src="scrip.js"></script>
+    <div class="login-box">
+        <section>
+            <h2>Izveidot lietotāju</h2>
+            <form id="userForm" method="POST" action="register.php">
+                <div class="user-box">
+                    <input type="text" name="first_name" required >
+                    <label for="first_name">Vārds</label>
+                </div>
+                <div class="user-box">
+                    <input type="text" name="last_name" required>
+                    <label for="last_name">Uzvārds</label>
+                </div>
+                <div class="user-box">
+                    <input type="tel" name="phone" required >
+                    <label for="phone">Telefona numurs</label>
+                </div>
+                <div class="user-box">
+                    <input type="email" name="email" required>
+                    <label for="email">E-pasts</label>
+                </div>
+                <div class="user-box">
+                    <input type="date" name="d_o_b" required>
+                    <label for="d_o_b">Dzimšana</label>
+                </div>
+                <div class="user-box">
+                    <input type="password" name="password" required >
+                    <label for="password">Parole</label>
+                </div>
+                <button type="submit">Izveidot kontu</button>
+            </form>
+        </section>
+    </div>
 </body>
 </html>
