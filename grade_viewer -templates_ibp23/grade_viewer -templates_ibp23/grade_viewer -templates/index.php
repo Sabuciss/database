@@ -35,6 +35,16 @@
   <a href="index.php" class="btn">🔄 Reset</a>
 </form>
 
+<h2 style="text-align:center; margin-top: 50px;">➕ Add New Grade</h2>
+
+<form method="post" action="addgrade.php" style="text-align: center; margin-top: 20px;">
+  <input type="text" name="student" placeholder="👤 Student Name" required pattern=".{2,100}" title="Min 2 characters">
+  <input type="text" name="subject" placeholder="📘 Subject Name" required pattern=".{2,100}" title="Min 2 characters">
+  <input type="number" name="grade" placeholder="📝 Grade (1-10)" min="1" max="10" required style="width: 115px;">
+  <button class="btn" type="submit">💾 Save</button>
+</form>
+
+
 <table>
   <thead>
     <tr>
@@ -57,6 +67,8 @@
     <?php endif; ?>
   </tbody>
 </table>
+
+
 
 </body>
 </html>
