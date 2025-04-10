@@ -56,4 +56,14 @@ body {
   .btn:hover {
     background-color: #33cc77;
   }
+
+
+input[type="number"],
+input[type="text"],
+select {
+  padding: 8px;
+  width: 200px; /* Vai plašāks */
+  font-size: 16px;
+}
+  
   
